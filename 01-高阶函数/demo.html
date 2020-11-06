@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>function</title>
+</head>
+<body>
+  <h1>高阶函数</h1>
+  <div id="app">hello</div>
+  <script>
+    // call apply的作用 改变当前上下文this指向
+    // const obj = {
+    //   age: 20
+    // }
+    // const obj1 = {
+    //   name: 'hello',
+    //   age: 100
+    // }
+    // function foo(a1, a2, a3) {
+    //   console.log('haha')
+    //   console.log(arguments[0])
+    //   console.log(arguments[1])
+    // }
+    // // foo.call(obj1, 'hello', 'world', 'john', 'tom')
+    // foo.apply(obj1, ['hello', 'world'])
+    
+    // 高阶函数改变上下文
+    // const obj = {
+    //   age: 10
+    // }
+    // function changeContext(fn, context) {
+    //   const origin = fn
+    //   return function() {
+    //       origin.apply(context)
+    //   }
+    // }
+
+    // function foo() {
+    //   console.log(this.age)
+    // }
+
+    // let fn1 = changeContext(foo, obj)
+    // fn1()
+// ---------------
+    // function a1() {
+    //   console.log(1)
+    //   return function() {
+    //     console.log(2)
+    //   }
+    // }
+    // let a2 = a1()
+    // a2()
+
+    // JS实现AOP 动态添加hook函数
+
+    // 最简单的实现
+
+    // function a1() {
+    //   console.log(1)
+    // }
+    // let a2 = a1
+    // let a3 = function(fn) {
+    //   a2()
+      
+    // }
+    // function callback() {
+    //   console.log('哈哈 我是一个回调函数')
+    // }
+    // a3(callback)
+
+
+    // --------------
+
+    // innerHtml
+
+
+    // document.getElementById('app').innerHTML = "<span>11111</span>"
+
+
+    // function withHookBefore (originalFn, hookFn) {
+    //   return function () {
+    //     hookFn.apply(this, arguments)
+    //     return originalFn.apply(this, arguments)
+    //   }
+    // }
+    
+    // function fn1(a, b) {
+    //   // 业务模块代码
+    //   console.log('jack')
+  
+    // }
+    // function fn2(a, b) {
+    //   // my 代码
+    //   console.log('Tom')
+    //   console.log(a, b)
+    // }
+    // let fn = withHookBefore(fn1, fn2)
+    // fn(1, 2)
+
+    // 实际场景
+
+    // 加入页面有一个input输入框 用于搜索 
+    // input事件触发的是handleSearch这个函数
+    function handleSearch() {
+      axios.get('后台列表接口?search=this.search')
+      .then(res => {
+        console.log(res)
+        this.tableData = res.data //重新渲染列表
+      })
+    }
+
+    // 假如我们输入a  b c
+    // 我输入a的时候 已经执行一遍handleSearch
+    // 等我输入完成abc的时候会执行三遍
+
+    // 防抖函数 返回一个新的函数 也是高阶函数
+    // 输入最后一次的500毫秒之后执行
+    let fn1 = debounce(fn, 500)
+
+  </script>
+</body>
+</html>

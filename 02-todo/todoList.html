@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Todo</title>
+  <style>
+    .complete {
+      text-decoration: line-through;
+      background-color: #40b983;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <input type="text" id="inp"> 
+  <button id="btn">确认</button>
+  <ul id="content">
+    
+  </ul>
+
+  <script>
+    const inp = document.getElementById('inp')
+    const btn = document.getElementById('btn') 
+    const content = document.getElementById('content')
+    btn.addEventListener('click', function() {
+      let value = inp.value
+      // 判断空
+      if(!value) {
+        return false
+      }
+      // 去空格
+      value = value.trim()
+      const li = document.createElement('li')
+      li.innerHTML = `<span class="success">完成</span> ${value} <span class="delete">X</span>`
+      content.appendChild(li)
+      // 创建li之后清空表单
+      inp.value = ''
+    }, false)
+
+    content.addEventListener('click', function(e) {
+      if(e.target.className === 'delete') {
+        const parent = e.target.parentElement
+        const box = parent.parentElement
+        box.removeChild(parent)
+      }
+      if(e.target.className === 'success') {
+        const parent = e.target.parentElement
+        parent.className = "complete"
+      }
+    }, false)
+  </script>
+</body>
+</html>
+
