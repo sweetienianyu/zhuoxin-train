@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>挟持数组</title>
+</head>
+
+<body>
+  <h4>挟持数组</h4>
+  <script>
+    
+    const object1 = {
+      name: 'ssss',
+      age: 898,
+      info: {
+        avatar: 'https://www.baidu.com',
+      },
+      list: []
+    };
+    function observe(obj) {
+      const toString = Object.prototype.toString
+      
+      function walk(obj, key, value) {
+        Object.defineProperty(obj, key, {
+          get() {
+            console.log('get')
+            return value
+          },
+          set(val) {
+            console.log('set', val)
+            value = val
+          }
+        });
+      } 
+      for (let k in obj) {
+        if(toString.call(obj[k]) === "[object Object]") {
+          for(let childKey in obj[k]) {
+            walk(obj[k], childKey, obj[k][childKey])
+          }
+        }else if(toString.call(obj[k]) === "[object Array]") {
+          const arr_method = Array.prototype
+          const methodList = ['push', 'shift', 'unshift', 'concat']
+          methodList.forEach(method => {
+            const originMethod = arr_method[method]
+            arr_method[method] = function() {
+              console.log('ssss')
+              return originMethod.apply(this, arguments)
+            }
+          })
+          walk(obj, k, obj[k])
+        }else {
+          walk(obj, k, obj[k])
+        }
+      }
+    }
+    
+    observe(object1)
+    // object1.list.push(1)
+    // object1.list.push(2)
+    const object2 = {
+      arr: [1, 2, 3]
+    }
+    observe(object2)
+    object2.arr.push(1111)
+    
+  </script>
+</body>
+
+</html>

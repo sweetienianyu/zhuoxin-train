@@ -1,18 +1,14 @@
 <template>
   <div id="app">
-    <h4>test</h4>
-    <todo/>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
 
-import todo from './components/todo'
+
 export default {
   name: 'App',
-  components: {
-    todo
-  },
   data() {
     return {
     }
