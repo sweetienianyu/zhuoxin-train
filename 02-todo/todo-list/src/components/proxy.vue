@@ -6,13 +6,16 @@
 </template>
 
 <script>
+import proxy from './proxy.js'
 export default {
   props: {
     info: Object
   },
   created() {
     this.temp = {name: ''}
-    Object.keys(this.temp)
+    Object.keys(this.temp).forEach(key => {
+      proxy(this.info, this.temp, key)
+    })
   },
   methods: {
     handleChange(e) {
