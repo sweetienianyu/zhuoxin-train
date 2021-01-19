@@ -1,32 +1,38 @@
 <template>
-  <a-layout id="components-layout-demo-side" style="min-height: 100vh">
-    <a-layout-sider v-model="collapsed" collapsible :trigger="null">
-      <div class="logo"></div>
-      <SideMenu/>
-    </a-layout-sider>
-    <a-layout>
-      <a-layout-header style="background: #fff; padding: 0">
-        <a-icon
-          class="trigger"
-          :type="collapsed ? 'menu-unfold' : 'menu-fold' "
-          @click="collapsed = !collapsed"
-        >
-        </a-icon>
-        <Header/>
-      </a-layout-header>
-      <a-layout-content style="margin: 0 16px">
-        <router-view></router-view>
-      </a-layout-content>
-      <a-layout-footer style="text-align: center">
-        <Footer/>
-      </a-layout-footer>
+  <div>
+    <a-layout id="components-layout-demo-side" style="min-height: 100vh">
+      <a-layout-sider v-model="collapsed" collapsible :trigger="null">
+        <div class="logo"></div>
+        <SideMenu />
+      </a-layout-sider>
+      <a-layout>
+        <a-layout-header style="background: #fff; padding: 0">
+          <a-icon
+            class="trigger"
+            :type="collapsed ? 'menu-unfold' : 'menu-fold'"
+            @click="collapsed = !collapsed"
+          >
+          </a-icon>
+          <Header />
+        </a-layout-header>
+        <a-layout-content style="margin: 0 16px">
+          <router-view></router-view>
+        </a-layout-content>
+        <a-layout-footer style="text-align: center">
+          <Footer />
+        </a-layout-footer>
+      </a-layout>
     </a-layout>
-  </a-layout>
+    <div>
+  </div>
+  <SettingDrawer/>
+  </div>
 </template>
 <script>
-import Header from './Header'
-import SideMenu from './SideMenu'
-import Footer from './Footer'
+import Header from "./Header";
+import SideMenu from "./SideMenu";
+import Footer from "./Footer";
+import SettingDrawer from '@/components/SettingDrawer'
 export default {
   data() {
     return {
@@ -36,8 +42,12 @@ export default {
   components: {
     Header,
     SideMenu,
-    Footer
+    Footer,
+    SettingDrawer
   },
+  methods: {
+    
+  }
 };
 </script>
 
