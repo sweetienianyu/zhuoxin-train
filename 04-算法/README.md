@@ -16,7 +16,7 @@ arr = [[1, 2], [3, 4]]
 
 #### 一星难度 多维数组展平 对数组S = {a1, a2, ...an} 函数F将数组展平 这时候就要用科学的方式进行思考了 找到递归表达式
 #### F(S) = F(a1) U F(a2) U ... U F(an)
-#### F(ai) = ai & f(ai)
+#### F(ai) = {ai else f(ai) }
 ```
 function flatten(arr) {
   return [].concat(
@@ -124,7 +124,7 @@ foo(1, 2, 3, 4)
     <span>world</span>
   </div>
 </div>
-```
+``` 
 
 
 #### 算法对职业生涯的意义
