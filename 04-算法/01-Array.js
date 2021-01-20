@@ -110,3 +110,22 @@ create_runner(function* () {
 
 // 笛卡尔积
 // [1, 2] * ['a', 'b'] = [ [1, 'a'], [1, 'b'], [2, 'a'], [2, 'b'] ] 
+function cartesian_product(...Martrix) {
+  if(Martrix.length === 0) return []
+  if(Martrix.length === 1) return Martrix[0]
+  return Martrix.reduce((A, B) => {
+    const product = []
+    for(let i = 0; i<A.length; i++) {
+      for(let j = 0; j<B.length; j++) {
+        product.push(
+          Array.isArray(A[i]) ?
+            [...A[i], B[j]] : [A[i], B[j]]
+        )
+      }
+    }
+    return product
+  })
+}
+
+// 中文排序
+['王成成', '王峰', '蒋雪', '李明'].soft((a, b) => a.localCompare(b, 'zh'))
