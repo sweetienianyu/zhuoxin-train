@@ -39,11 +39,25 @@ function insert(A, x) {
 const A1 = [2, 4, 7, 9, 13]
 const x1 = 8
 insert(A1, x1)
-console.log(A1)
 
-function foo() {
-  // 循环不变式 i指向下一个需要排序的元素
+function insert1(A, i, x) {
+  let p = i - 1
+  while(p >= 0 && A[p] > x) {
+    A[p+1] = A[p]
+    p--
+  }
+  A[p+1] = x
 }
+function insertion_sort(A) {
+  // 循环不变式 i指向下一个需要排序的元素
+  for(let i = 1; i<A.length; i++) {
+    insert1(A, i, A[i])
+  }
+}
+
+const A2 = [5,8,1,3,2,4,9]
+insertion_sort(A2)
+console.log(A2)
   </script>
 </body>
 </html>
