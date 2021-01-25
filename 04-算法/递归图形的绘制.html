@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>递归图形的绘制</title>
+</head>
+<body>
+  <script>
+    function tree_plot(ctx, p, a, w, h, L) {
+      if(L > 10) return
+      const [x, y] = p
+      ctx.translate(x, y)
+      ctx.rotate(a * Math.PI / 180)
+      const nextX = x + h * Math.sin(a * Math.PI / 180)
+      const nextY = y - h * Math.cos(a * Math.PI / 180)
+      tree_plot([nextX, nextY], a+15, w*0.65, h*0.9, L+1)
+      tree_plot([nextX, nextY], a-15, w*0.65, h*0.9, L+1)
+    }
+  </script>
+</body>
+</html>
