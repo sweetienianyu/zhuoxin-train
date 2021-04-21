@@ -1,26 +1,17 @@
-interface jqueryInstance {
-  html: (html: string) => jqueryInstance
-}
+// Es6 模块化
 
-
-// 函数重载
-declare var $ : (param: () => void) => void;
-
-declare function $(param: () => void):void;
-
-declare function $(param:string):jqueryInstance;
-
-declare namespace $ {
-  namespace fn {
-    class init {}
+declare module 'jquery' {
+  interface jqueryInstance {
+    html: (html: string) => jqueryInstance;
   }
+
+  function $(readyFunc: () => void):void;
+  function $(selector: string): jqueryInstance;
+  namespace $ {
+    namespace fn {
+      class init {}
+    }
+  }
+
+  export = $;
 }
-
-
-// 使用interface语法实现函数重载
-// interface Jquery {
-//   (readyFunc : () => void):void;
-//   (selector: string): jqueryInstance
-// }
-
-// declare var $:Jquery
